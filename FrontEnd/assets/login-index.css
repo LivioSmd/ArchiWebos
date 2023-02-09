@@ -1,0 +1,116 @@
+.titreModifier {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    margin-top: 13%;
+    margin-bottom: 6%;
+}
+
+.titreModifier h2 {
+    margin-right: 17px;    
+}
+
+.titreModifier a{
+    font-size: 14px;
+}
+
+.titre-modal {
+    font-size: 26px;
+    display: flex;
+    justify-content: center;
+}
+
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed ;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    /* accroche l'animation sur la modale*/
+    animation: fadeIn 0.3s both;
+}
+
+.modal-wrapper {
+    overflow: auto;
+    background-color: #FFF;
+    padding: 20px;
+    width: 630px;
+    height: 731px;
+    max-width: calc(100vw - 20px);
+    max-height: calc(100vh - 20px);
+}
+
+/* creation effet d'animation transition oppacité de la modale*/
+@keyframes fadeIn {
+    from { opacity: 0;}
+    to { opacity: 1;}
+}
+
+.modal-wrapper {
+    position: relative;
+}
+
+.photos-editer {
+    display: grid;
+    grid-template-columns: repeat(5, 91px);
+    grid-template-rows: repeat(2, 139px);
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.photos-editer figure img {
+    width: 92%;
+}
+
+.js-close-modal {
+    position: absolute;
+    right: 20px;
+    border: none;
+    background-color: white;
+}
+
+.js-close-modal i {
+    font-size: 20px;
+}
+
+.titre-modal {
+    margin-top: 6%;
+}
+
+.div-button {
+    display: flex;
+    justify-content: center;
+    border-top: 1px black solid;
+    width: 72%;
+    margin-left: 14%;
+    margin-top: 9%;
+}
+
+.div-button button {
+    font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    width: 237px;
+    height: 36px;
+    text-align: center;
+    border-radius: 30px;
+    border: 1px;
+    margin-top: 10%;
+}
+
+.suppr-photos {
+    color: red;
+    display: flex;
+    justify-content: center;
+    margin-top: 4%;
+}
+
+.js-modal-photo {
+    font-size: 14px;
+    margin-left: 32px;
+}

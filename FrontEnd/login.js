@@ -36,7 +36,7 @@ function fetchPost (url, data) {
         console.log(localStorage.getItem('token'));
 
         //redire l'utilisateur automatique quand reponse.ok est exact 
-        location.href='http://127.0.0.1:5501/index.html'
+        location.href='http://127.0.0.1:5501/login-index.html'
     })
     //attrape l'erreur et message ecrit en rouge sur la page
     .catch(error => { 

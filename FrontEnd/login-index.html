@@ -8,8 +8,10 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
+	<script src="https://kit.fontawesome.com/b68f069506.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="script.js" defer></script>
+	<link rel="stylesheet" href="./assets/login-index.css">
+	<script src="login-index.js" defer></script>
 </head>
 <body>
 <header>
@@ -27,21 +29,19 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
+			<a href="#modal1" class="js-modal js-modal-photo"><i class="fa-regular fa-pen-to-square"></i> modifier</a>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
 			<p>En cas de besoin, une équipe pluridisciplinaire peut être constituée : architecte DPLG, décorateur(trice)</p>
-		</article>
+		</article> 
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<div class="filtres">
-			<button class="btn-filtretous">Tous</button>
-			<button class="btn-filtreObjets">Objets</button>
-			<button class="btn-filtreappartements">Appartements</button>
-			<button class="btn-filtrehotelsretaurants">Hôtels & restaurants</button>
+		<div class="titreModifier">
+			<h2>Mes Projets</h2>
+			<a href="#modal1" class="js-modal"><i class="fa-regular fa-pen-to-square"></i> modifier</a>
 		</div>
 		<div class="gallery">
 		</div>
@@ -59,6 +59,18 @@
 			<input type="submit" value="Envoyer">
 		</form>
 	</section>
+	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titre-modal" style="display: none;"> 
+		<div class="modal-wrapper js-modal-stop">
+			<button class="js-close-modal"><i class="fa-solid fa-xmark"></i></button>
+			<p class="titre-modal">Galerie photo</p>
+			<div class="photos-editer">
+			</div>
+			<div class="div-button">
+				<button class="button" type="submit">Ajouter une photo</button>
+			</div>
+			<p class="suppr-photos">Supprimer la galerie</p>
+		</div>
+	</aside>
 </main>
 
 <footer>
