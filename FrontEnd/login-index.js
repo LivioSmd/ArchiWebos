@@ -81,7 +81,7 @@ window.addEventListener('keydown', function (event) {
 const photosEditer = document.querySelector('.photos-editer')
 
 
-function createFigureModale (source, texte) {
+function createFigureModale (source, texte, id) {
     let figure = document.createElement('figure');
     photosEditer.appendChild(figure);
 
@@ -94,17 +94,46 @@ function createFigureModale (source, texte) {
     figure.appendChild(figcaption)
 
     figcaption.textContent = 'éditer'
+
+    
+    //création  de l'îcone poubelle pour supprimer les images dans le modale
+    const trash = document.createElement('i')
+    figure.appendChild(trash)
+    trash.className = 'fa-solid fa-trash-can';
+
+    //click supprime
+    trash.addEventListener("click", (event) => {
+        event.preventDefault();
+    
+        let data = {
+            id
+        }
+    
+        fetchDelete('http://localhost:5678/api/works/{id}', data)
+    })
+
+    function fetchDelete (url, data) { 
+        fetch(url, {
+        method : "DELETE",
+        headers : {
+             "Content-Type": "application/json",
+             "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4",
+        }, 
+        body : JSON.stringify(data)
+        })
+    }
+
 } 
 
 function displayPortfolioModale (data) {
     for (let i of data) {
-        createFigureModale (i.imageUrl, i.title)
+        createFigureModale (i.imageUrl, i.title, i.id)
     }
 }
 
 function fetchPortfolioModale () { 
     fetch('http://localhost:5678/api/works')
-        .then(response => (response.json()))
+        .then(response => response.json())
         .then(data => displayPortfolioModale(data))
 }
 
