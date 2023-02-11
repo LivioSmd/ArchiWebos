@@ -80,6 +80,7 @@ window.addEventListener('keydown', function (event) {
 //afficher les photos dans la modale
 const photosEditer = document.querySelector('.photos-editer')
 
+const token = localStorage.getItem('token');
 
 function createFigureModale (source, texte, id) {
     let figure = document.createElement('figure');
@@ -102,6 +103,17 @@ function createFigureModale (source, texte, id) {
     trash.className = 'fa-solid fa-trash-can';
 
     //click supprime
+    function fetchDelete (url, data) { 
+        fetch(url, {
+        method : "DELETE",
+        headers : {
+             "Content-Type": "application/json",
+             "Authorization": "token",
+        }, 
+        body : JSON.stringify(data)
+        })
+    }
+
     trash.addEventListener("click", (event) => {
         event.preventDefault();
     
@@ -112,16 +124,6 @@ function createFigureModale (source, texte, id) {
         fetchDelete('http://localhost:5678/api/works/{id}', data)
     })
 
-    function fetchDelete (url, data) { 
-        fetch(url, {
-        method : "DELETE",
-        headers : {
-             "Content-Type": "application/json",
-             "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4",
-        }, 
-        body : JSON.stringify(data)
-        })
-    }
 
 } 
 

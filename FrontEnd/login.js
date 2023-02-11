@@ -31,11 +31,10 @@ function fetchPost (url, data) {
         throw new Error('Erreur dans l’identifiant ou le mot de passe');
     })
     .then(response => {
-        //stocage du token pour l'accès sur les autres pages
+        //stockage du token pour l'accès sur les autres pages
         localStorage.setItem('token',response.token)
-        console.log(localStorage.getItem('token'));
 
-        //redire l'utilisateur automatique quand reponse.ok est exact 
+        //redirige l'utilisateur automatique quand reponse.ok est exact 
         location.href='http://127.0.0.1:5501/login-index.html'
     })
     //attrape l'erreur et message ecrit en rouge sur la page
