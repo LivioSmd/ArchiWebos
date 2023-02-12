@@ -42,7 +42,10 @@ const  openModal = function (event) {
     target.removeAttribute('aria.hidden')
     target.setAttribute('aria-modal', 'true')
     modal = target
-    modal.addEventListener('click', closeModal)
+    modal.addEventListener('click', (event) => {
+        closeModal(event)
+        resetPageModale()
+    })
     modal.querySelector('.js-close-modal').addEventListener('click', closeModal)
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 
@@ -108,7 +111,7 @@ function createFigureModale (source, texte, id) {
         method : "DELETE",
         headers : {
              "Content-Type": "application/json",
-             "Authorization": "token",
+             "Authorization": "bearer " + token,
         }, 
         body : JSON.stringify(data)
         })
@@ -140,3 +143,34 @@ function fetchPortfolioModale () {
 }
 
 fetchPortfolioModale()
+
+const boutonAJouterPhotoModale = document.querySelector(".button-ajouter-photo")
+const titreModalePage1 = document.querySelector(".titre-modal")
+const divPhotoEditeModale = document.querySelector(".photos-editer")
+const iconeModalePage1 = document.querySelector(".fa-up-down-left-right")
+const divBoutonAJouterPhotoModale = document.querySelector(".div-button")
+const textSuppressionPhotoModale = document.querySelector(".suppr-photos")
+const modalePage2 =  document.querySelector(".modal-page2")
+
+function pageModale2 () {
+    titreModalePage1.style.display = "none"; 
+    divPhotoEditeModale.style.display = "none";
+    iconeModalePage1.style.display = "none";
+    divBoutonAJouterPhotoModale.style.display = "none";
+    textSuppressionPhotoModale.style.display = "none";
+
+    modalePage2.style.display = "flex";
+}
+
+function resetPageModale () {
+    titreModalePage1.style.display = "block"; 
+    divPhotoEditeModale.style.display = "grid";
+    iconeModalePage1.style.display = "block";
+    divBoutonAJouterPhotoModale.style.display = "block";
+    textSuppressionPhotoModale.style.display = "block";
+
+    modalePage2.style.display = "none";
+}
+
+boutonAJouterPhotoModale.addEventListener('click', pageModale2)
+
