@@ -121,12 +121,13 @@ function createFigureModale (source, texte, id) {
 
     trash.addEventListener("click", (event) => {
         event.preventDefault();
-    
+
         let data = {
             id
         }
     
-        fetchDelete('http://localhost:5678/api/works/{id}', data)
+        fetchDelete('http://localhost:5678/api/works/id', data)
+        console.log(data)
     })
 
 
