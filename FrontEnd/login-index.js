@@ -46,8 +46,9 @@ const  openModal = function (event) {
         resetPageModale()
     })
     modal.querySelector('.js-close-modal').addEventListener('click', closeModal)
+    modal.querySelector('.js-close-modal-page2').addEventListener('click', closeModal)
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
-
+    modalePage2.style.display = "none";
 }
 
 document.querySelectorAll(".js-modal").forEach(a => {
@@ -66,6 +67,7 @@ const closeModal = function (event) {
     modal.removeAttribute('aria-modal')
     modal.removeEventListener('click', closeModal)
     modal.querySelector('.js-close-modal').removeEventListener('click', closeModal)
+    modal.querySelector('.js-close-modal-page2').removeEventListener('click', closeModal)
     modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
     modal = null
 }
@@ -152,7 +154,7 @@ const modalePage2 =  document.querySelector(".modal-page2")
 
 function pageModale2 () {
     modalePage1.style.display = "none";
-    modalePage2.style.display = "flex";
+    modalePage2.style.display = "";
 }
 
 function resetPageModale () {

@@ -76,6 +76,8 @@
 
 .js-close-modal i {
     font-size: 20px;
+    position: relative;
+    bottom: 38px;
 }
 
 .div-button {
@@ -132,11 +134,6 @@
     position: relative;
     bottom: 417px;
     left: 127px;
-}
-
-
-.modal-page2 {
-    display: none;
 }
 
 .titre-modal-page2 {
@@ -206,3 +203,43 @@
     height: 36px;
 }
 
+.fa-mountain-sun {
+    border: 3px #B9C5CC solid;
+    color: #B9C5CC;
+    padding: 2px;
+    font-size: 40px;
+    margin-top: 6%;
+}
+
+.js-close-modal-page2 { 
+    border: none;
+    background-color: white;
+}
+
+.js-close-modal-page2 i {
+    font-size: 20px;
+    position: relative;
+    left: 302.5px;
+}
+
+.label-ajout-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    color: #306685;
+    background-color: #CBD6DC;
+    width: 192px;
+    border-radius: 60px;
+    margin-top: 1%;
+}
+
+.input-img-modal-page2 {
+    visibility: hidden;
+}
+
+.indication-image{
+    margin-top: 10px;
+    margin-bottom: 20px;
+    font-size: 11px;
+}
