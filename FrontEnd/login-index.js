@@ -114,9 +114,7 @@ function createFigureModale (source, texte, id) {
         headers : {
              "Content-Type": "application/json",
              "Authorization": "bearer " + token,
-        }, 
-        body : JSON.stringify(data)
-        })
+        }})
     }
 
     trash.addEventListener("click", (event) => {
@@ -126,8 +124,7 @@ function createFigureModale (source, texte, id) {
             id
         }
     
-        fetchDelete('http://localhost:5678/api/works/id', data)
-        console.log(data)
+        fetchDelete("http://localhost:5678/api/works/" + id, data)
     })
 
 
@@ -152,6 +149,7 @@ fetchPortfolioModale()
 const boutonAJouterPhotoModale = document.querySelector(".button-ajouter-photo")
 const modalePage1 = document.querySelector(".modal-page1")
 const modalePage2 =  document.querySelector(".modal-page2")
+const flecheRetourModale1 = document.querySelector(".fleche-retour-modal2")
 
 function pageModale2 () {
     modalePage1.style.display = "none";
@@ -164,4 +162,4 @@ function resetPageModale () {
 }
 
 boutonAJouterPhotoModale.addEventListener('click', pageModale2)
-
+flecheRetourModale1.addEventListener('click', resetPageModale)

@@ -15,27 +15,33 @@
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	<nav>
-		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<a href="login.html">login</a>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
+	<div class="bandeau-noir">
+		<p class="mode-edition"><i class="fa-regular fa-pen-to-square"></i> Mode édition</p>
+		<p class="texte2-bandeau-noir">publier les changements</p>
+	</div>
+	<div class="titre-page">
+		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+		<nav>
+			<ul>
+				<li>projets</li>
+				<li>contact</li>
+				<a href="login.html">login</a>
+				<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+			</ul>
+		</nav>
+	</div>
 </header>
 <main>
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
-			<a href="#modal1" class="js-modal js-modal-phot"><i class="fa-regular fa-pen-to-square"></i> modifier</a>
+			<a href="#modal1" class="js-modal js-modal-photo"><i class="fa-regular fa-pen-to-square"></i> modifier</a>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-			<p>En cas de besoin, une équipe pluridisciplinaire peut être constituée : architecte DPLG, décorateur(trice)</p>
+			<p>En cas de besoin, une équipe pluridisciplinaire peut être constituée de : architecte DPLG, décorateur(trice)</p>
 		</article> 
 	</section>
 	<section id="portfolio">
@@ -73,11 +79,12 @@
 				<p class="suppr-photos">Supprimer la galerie</p>
 			</div>
 			<div class="modal-page2">
+				<button class="fleche-retour-modal2"><i class="fa-solid fa-arrow-left"></i></button>
 				<button class="js-close-modal-page2"><i class="fa-solid fa-xmark"></i></button>
 				<p class="titre-modal-page2">Ajout photo</p>
 				<form action="#"> 
 					<div class="form-image-modal">
-						<i class="fa-solid fa-mountain-sun"></i>
+						<img src="assets/icons/icone-insta-modale.png" alt="icone-insta-modale" class="icone-insta-modale">
 						<input class="input-img-modal-page2" type="file" id="image" name="image" accept="image/png, image/jpg">
 						<label class="label-ajout-image" for="image">+ Ajouter photo</label>
 						<p class="indication-image">jpg, png : 4mo max</p>

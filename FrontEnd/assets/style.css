@@ -62,6 +62,21 @@ header {
 section {
 	margin: 50px 0
 }
+
+#introduction p {
+    width: 70%;
+}
+
+#introduction article {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#introduction h2 {
+    margin-bottom: 18px;
+}
+
 a {
 	padding: 0 10px;
     font-size: 1.2em;

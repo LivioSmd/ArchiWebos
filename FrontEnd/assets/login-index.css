@@ -1,9 +1,67 @@
+header {
+    display: flex;
+    flex-direction: column;
+}
+
+.bandeau-noir {
+    background-color: #000000;
+    height: 40px;
+    margin-bottom: 2.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    position: absolute;
+    top: 0;
+    width: 1140px;
+    z-index: 99;
+}
+
+.mode-edition { 
+    color: #FFF;
+}
+
+.texte2-bandeau-noir {
+    color: black;
+    background-color: #FFF;
+    width: 18.5%;
+    height: 69%;
+    border-radius: 15px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titre-page {
+    display: flex;
+    justify-content: inherit; 
+    margin-top: 1%;
+}
+
+.titre-page ul {
+    display: flex;
+}
+
 .titreModifier {
     display: flex;
     align-items: baseline;
     justify-content: center;
     margin-top: 13%;
     margin-bottom: 6%;
+}
+
+#introduction p {
+    width: 70%;
+}
+
+#introduction article {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#introduction h2 {
+    margin-bottom: 18px;
 }
 
 .titreModifier h2 {
@@ -111,7 +169,7 @@
 
 .js-modal-photo {
     font-size: 14px;
-    margin-left: 32px;
+    margin-left: 46px;
 }
 
 .fa-trash-can {
@@ -132,7 +190,7 @@
     border-radius: 3px;
     padding: 3px;
     position: relative;
-    bottom: 417px;
+    bottom: 418px;
     left: 127px;
 }
 
@@ -204,12 +262,8 @@
     background-color: #A7A7A7;
 }
 
-.fa-mountain-sun {
-    border: 3px #B9C5CC solid;
-    color: #B9C5CC;
-    padding: 2px;
-    font-size: 40px;
-    margin-top: 6%;
+.icone-insta-modale {
+    margin-top: 16px;
 }
 
 .js-close-modal-page2 { 
@@ -221,6 +275,17 @@
     font-size: 20px;
     position: relative;
     left: 302.5px;
+}
+
+.fleche-retour-modal2 { 
+    border: none;
+    background-color: white;
+}
+
+.fleche-retour-modal2 i {
+    font-size: 20px;
+    position: absolute;
+    right: 92.5%;
 }
 
 .label-ajout-image {
