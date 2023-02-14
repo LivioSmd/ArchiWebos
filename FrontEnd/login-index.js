@@ -49,6 +49,7 @@ const  openModal = function (event) {
     modal.querySelector('.js-close-modal-page2').addEventListener('click', closeModal)
     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
     modalePage2.style.display = "none";
+    labelImageModalePage2.style.display = "flex";
 }
 
 document.querySelectorAll(".js-modal").forEach(a => {
@@ -70,6 +71,7 @@ const closeModal = function (event) {
     modal.querySelector('.js-close-modal-page2').removeEventListener('click', closeModal)
     modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
     modal = null
+    afficheImage.src = ""
 }
  
 
@@ -163,3 +165,20 @@ function resetPageModale () {
 
 boutonAJouterPhotoModale.addEventListener('click', pageModale2)
 flecheRetourModale1.addEventListener('click', resetPageModale)
+
+//chargement de l'image selectionnée dans la 2eme page de la modale 
+const afficheImage = document.getElementById("imagepreview")
+const labelImageModalePage2 = document.querySelector(".label-ajout-image")
+
+function previewImage (e) {
+    // e.files contient un objet FileList
+    const [image] = e.files
+
+    // "image" est un objet File
+    if (image) {
+         // On change l'URL de l'image
+        afficheImage.src = URL.createObjectURL(image)
+        labelImageModalePage2.style.display = "none";
+    }
+
+}
