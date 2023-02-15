@@ -105,7 +105,6 @@ function createFigureModale (source, id) {
     figure.appendChild(figcaption)
 
     figcaption.textContent = 'éditer'
-
     
     //création  de l'îcone poubelle pour supprimer les images dans le modale
     const trash = document.createElement('i');
@@ -148,7 +147,6 @@ function fetchPortfolioModale () {
 
 fetchPortfolioModale()
 
-
 //changer entre la page 1 et 2 de la modale 
 const boutonAJouterPhotoModale = document.querySelector(".button-ajouter-photo")
 const modalePage1 = document.querySelector(".modal-page1")
@@ -184,14 +182,11 @@ function previewImage (e) {
     }
 }
 
-
-
 const formAjoutPhoto = document.querySelector(".form-ajout-photo")
 const boutonValider = document.querySelector(".bouton-valider")
 const ImmagePreview = document.querySelector(".input-img-modal-page2");
 const titreFormulaire = document.getElementById("titre");
 const categorieFormulaire = document.getElementById("categorie");
-
 
 //fonction pour de pas permettre de valider le formulaire si l'un des champs n'est pas rempli (+message d'erreur)
 
@@ -239,8 +234,6 @@ categorieFormulaire.addEventListener('change', (e) => {
     values.category = e.target.value;
     verifForm();
 })
-
-
 
 formAjoutPhoto.addEventListener('submit', function (e) {
     e.preventDefault();
