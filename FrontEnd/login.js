@@ -9,7 +9,7 @@ formConnexion.addEventListener("submit", (event) => {
     event.preventDefault();
 
     let data = {
-        email : inputEmail.value,
+        email : inputEmail.value, 
         password : inputPassword.value
     }
 

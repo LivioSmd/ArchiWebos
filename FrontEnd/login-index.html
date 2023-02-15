@@ -82,11 +82,12 @@
 				<button class="fleche-retour-modal2"><i class="fa-solid fa-arrow-left"></i></button>
 				<button class="js-close-modal-page2"><i class="fa-solid fa-xmark"></i></button>
 				<p class="titre-modal-page2">Ajout photo</p>
-				<form method="post"	enctype="multipart/form-data"> 
+				<form method="post"	enctype="multipart/form-data" name="formModale" class="form-ajout-photo"> 
 					<div class="form-image-modal">
 						<img src="assets/icons/icone-insta-modale.png" alt="icone-insta-modale" class="icone-insta-modale">
 						<input class="input-img-modal-page2" type="file" id="image" name="image" accept="image/png, image/jpg" onchange="previewImage(this)">
 						<label class="label-ajout-image" for="image">+ Ajouter photo</label>
+						<span class="error-photo"></span>
 						<p class="indication-image">jpg, png : 4mo max</p>
 					</div>
 					<div class="div-image-preview">
@@ -94,10 +95,12 @@
 					</div>
 					<div class="form-titre-modal">
 						<label for="titre">Titre</label>
+						<span class="error-titre"></span>
 						<input type="text" id="titre" name="titre">
 					</div>
 					<div class="form-categorie-modal">
 						<label for="categorie">Catégorie</label>
+						<span class="error-categorie"></span>
 						<select name="categorie" id="categorie">
 							<option value=""></option>
 							<option value="objets">Objets</option>
@@ -106,7 +109,7 @@
 						</select>
 					</div>
 						<div class="form-submit-modal">
-						<input type="submit" value="valider">
+						<input id="bouton-valider" type="submit" value="valider" class="bouton-valider">
 					</div>
 				</form>
 			</div>

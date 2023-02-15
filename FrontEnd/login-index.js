@@ -2,6 +2,8 @@
 const photosPageEditeur = document.querySelector(".gallery")
 
 function createFigurePageEditeur (source, texte) {
+    // photosPageEditeur.innerHTML = '';
+    // tout effacer avant de créer
     let figure = document.createElement('figure');
     photosPageEditeur.appendChild(figure);
 
@@ -34,7 +36,7 @@ fetchPortfolioPageEditeur()
 //creation de la modale
 let modal = null
 
-const  openModal = function (event) {
+const openModal = function (event) {
     event.preventDefault()
     const target = document.querySelector(event.target.getAttribute('href'))
     target.style.display = null
@@ -88,7 +90,9 @@ const photosEditer = document.querySelector('.photos-editer')
 
 const token = localStorage.getItem('token');
 
-function createFigureModale (source, texte, id) {
+function createFigureModale (source, id) {
+    // photosEditer.innerHTML = '';
+    // tout effacer avant de créer
     let figure = document.createElement('figure');
     photosEditer.appendChild(figure);
 
@@ -104,37 +108,35 @@ function createFigureModale (source, texte, id) {
 
     
     //création  de l'îcone poubelle pour supprimer les images dans le modale
-    const trash = document.createElement('i')
-    figure.appendChild(trash)
+    const trash = document.createElement('i');
+    figure.appendChild(trash);
     trash.className = 'fa-solid fa-trash-can';
-
-
-    //click supprime
-    function fetchDelete (url, data) { 
-        fetch(url, {
-        method : "DELETE",
-        headers : {
-             "Content-Type": "application/json",
-             "Authorization": "bearer " + token,
-        }})
-    }
 
     trash.addEventListener("click", (event) => {
         event.preventDefault();
-
-        let data = {
-            id
-        }
-    
-        fetchDelete("http://localhost:5678/api/works/" + id, data)
+        fetchDelete("http://localhost:5678/api/works/" + id)
     })
-
-
 } 
+
+//click supprime
+function fetchDelete (url) { 
+    fetch(url, {
+    method : "DELETE",
+    headers : {
+            "Content-Type": "application/json",
+            "Authorization": "bearer " + token,
+    }})
+    .then(response => {
+        if(response.ok) {
+            fetchPortfolioPageEditeur();
+            fetchPortfolioModale();
+        }
+    })
+}
 
 function displayPortfolioModale (data) {
     for (let i of data) {
-        createFigureModale (i.imageUrl, i.title, i.id)
+        createFigureModale (i.imageUrl, i.id)
     }
 }
 
@@ -180,5 +182,111 @@ function previewImage (e) {
         afficheImage.src = URL.createObjectURL(image)
         labelImageModalePage2.style.display = "none";
     }
+}
 
+
+
+const formAjoutPhoto = document.querySelector(".form-ajout-photo")
+const boutonValider = document.querySelector(".bouton-valider")
+const ImmagePreview = document.querySelector(".input-img-modal-page2");
+const titreFormulaire = document.getElementById("titre");
+const categorieFormulaire = document.getElementById("categorie");
+
+
+//fonction pour de pas permettre de valider le formulaire si l'un des champs n'est pas rempli (+message d'erreur)
+
+// vérification active du formulaire
+function verifForm () {
+    if (values.image == "") {
+        boutonValider.style.backgroundColor = '#A7A7A7';
+        boutonValider.style.cursor = 'pointer';
+        return;
+    }
+    
+    if (values.title == "") {
+        boutonValider.style.backgroundColor = '#A7A7A7';
+        boutonValider.style.cursor = 'pointer';
+        return;
+    } 
+    
+    if (values.category == "") {
+        boutonValider.style.backgroundColor = '#A7A7A7';
+        boutonValider.style.cursor = 'pointer';
+        return;
+    }
+
+    boutonValider.style.backgroundColor = '#1D6154';
+    boutonValider.style.cursor = 'pointer';
+}
+
+let values = {
+    'image' : '',
+    'title' : '',
+    'category' : ''
+}
+
+ImmagePreview.addEventListener('change', (e) => {
+    values.image = e.target.value;
+    verifForm();
+})
+
+titreFormulaire.addEventListener('input', (e) => {
+    values.title = e.target.value;
+    verifForm();
+})
+
+categorieFormulaire.addEventListener('change', (e) => {
+    values.category = e.target.value;
+    verifForm();
+})
+
+
+
+formAjoutPhoto.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (ImmagePreview.value == "") {
+        const errorImage = document.querySelector(".error-photo");
+        errorImage.innerHTML = "Importer une image"
+        errorImage.style.color = "red"
+    } else if (titreFormulaire.value == "") {
+        const errorTitre = document.querySelector(".error-titre");
+        errorTitre.innerHTML = "le champs titre est requis"
+        errorTitre.style.color = "red"
+    } else if (categorieFormulaire.value == "") {
+        const errorCategorie = document.querySelector(".error-categorie");
+        errorCategorie.innerHTML = "Choisir une catégorie"
+        errorCategorie.style.color = "red"
+    } 
+})
+
+
+boutonValider.addEventListener("submit", (event) => {
+    event.preventDefault();
+    console.log('test');
+
+    let data = {
+        image : ImmagePreview.value, 
+        titre : titreFormulaire.value,
+        categorie : categorieFormulaire.value
+    }
+
+   fetchPostImage("http://localhost:5678/api/works", data)
+})
+
+function fetchPostImage (url, data) {
+    fetch(url, {
+        method : "POST",
+        headers : {
+             "Content-Type": "multipart/form-data",
+             "accept": "application/json"},
+        body : JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        //initie l'erreur au cas ou reponse.ok n'est pas exacte 
+        throw new Error("autorisation requise");
+    })
 }
