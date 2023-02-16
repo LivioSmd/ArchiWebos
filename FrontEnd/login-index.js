@@ -183,14 +183,12 @@ function previewImage (e) {
 }
 
 const formAjoutPhoto = document.querySelector(".form-ajout-photo")
-const boutonValider = document.querySelector(".bouton-valider")
-const ImmagePreview = document.querySelector(".input-img-modal-page2");
+const boutonValider = document.getElementById("bouton-valider")
+const ImagePreview = document.querySelector(".input-img-modal-page2");
 const titreFormulaire = document.getElementById("titre");
 const categorieFormulaire = document.getElementById("categorie");
 
-//fonction pour de pas permettre de valider le formulaire si l'un des champs n'est pas rempli (+message d'erreur)
-
-// vérification active du formulaire
+//vérification du formulaire
 function verifForm () {
     if (values.image == "") {
         boutonValider.style.backgroundColor = '#A7A7A7';
@@ -220,7 +218,7 @@ let values = {
     'category' : ''
 }
 
-ImmagePreview.addEventListener('change', (e) => {
+ImagePreview.addEventListener('change', (e) => {
     values.image = e.target.value;
     verifForm();
 })
@@ -235,10 +233,11 @@ categorieFormulaire.addEventListener('change', (e) => {
     verifForm();
 })
 
+//affiche message d'erreur en rouge pour le formulaire d'ajout sur la modale
 formAjoutPhoto.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    if (ImmagePreview.value == "") {
+    if (ImagePreview.value == "") {
         const errorImage = document.querySelector(".error-photo");
         errorImage.innerHTML = "Importer une image"
         errorImage.style.color = "red"
@@ -254,32 +253,28 @@ formAjoutPhoto.addEventListener('submit', function (e) {
 })
 
 
-boutonValider.addEventListener("submit", (event) => {
-    event.preventDefault();
-    console.log('test');
+//envoyer les nouvelles images à l'API
+formAjoutPhoto.addEventListener('submit', function (e) {
+    e.preventDefault()
 
-    let data = {
-        image : ImmagePreview.value, 
-        titre : titreFormulaire.value,
-        categorie : categorieFormulaire.value
+    const formData = new FormData(formAjoutPhoto);
+
+    for (item of formData) {
+        console.log(item[0], item[1])
     }
 
-   fetchPostImage("http://localhost:5678/api/works", data)
+    fetchPostImage('http://localhost:5678/api/works', formData)
 })
 
-function fetchPostImage (url, data) {
+function fetchPostImage (url, formData) {
     fetch(url, {
         method : "POST",
         headers : {
              "Content-Type": "multipart/form-data",
-             "accept": "application/json"},
-        body : JSON.stringify(data)
+             "accept": "application/json"
+            },
+        body : JSON.stringify(formData)
     })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        }
-        //initie l'erreur au cas ou reponse.ok n'est pas exacte 
-        throw new Error("autorisation requise");
-    })
+        .then(response => response.json())
+        .then(response => console.log(response))
 }
