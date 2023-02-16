@@ -259,9 +259,10 @@ formAjoutPhoto.addEventListener('submit', function (e) {
 
     const formData = new FormData(formAjoutPhoto);
 
-    for (item of formData) {
-        console.log(item[0], item[1])
+    for (i of formData ) {
+        console.log(i[0], i[1])
     }
+
 
     fetchPostImage('http://localhost:5678/api/works', formData)
 })
@@ -271,7 +272,8 @@ function fetchPostImage (url, formData) {
         method : "POST",
         headers : {
              "Content-Type": "multipart/form-data",
-             "accept": "application/json"
+             "accept": "application/json",
+             "Authorization": "bearer " + token,
             },
         body : JSON.stringify(formData)
     })
