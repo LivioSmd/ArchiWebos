@@ -258,16 +258,14 @@ formAjoutPhoto.addEventListener('submit', function (e) {
     e.preventDefault()
 
     const formData = new FormData(formAjoutPhoto);
+    formData.append('imageUrl', ImagePreview.value)
+    const objetFormData = Object.fromEntries(formData)
+    console.log(objetFormData)
 
-    for (i of formData ) {
-        console.log(i[0], i[1])
-    }
-
-
-    fetchPostImage('http://localhost:5678/api/works', formData)
+    fetchPostImage('http://localhost:5678/api/works', objetFormData)
 })
 
-function fetchPostImage (url, formData) {
+function fetchPostImage (url, objetFormData) {
     fetch(url, {
         method : "POST",
         headers : {
@@ -275,8 +273,9 @@ function fetchPostImage (url, formData) {
              "accept": "application/json",
              "Authorization": "bearer " + token,
             },
-        body : JSON.stringify(formData)
+        body : JSON.stringify(objetFormData)
     })
         .then(response => response.json())
         .then(response => console.log(response))
+        console.log(JSON.stringify(objetFormData))
 }
