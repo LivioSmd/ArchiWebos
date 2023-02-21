@@ -113,6 +113,7 @@ function createFigureModale (source, id) {
 
     trash.addEventListener("click", (event) => {
         event.preventDefault();
+        location.reload()
         fetchDelete("http://localhost:5678/api/works/" + id)
     })
 } 
@@ -188,6 +189,7 @@ const ImagePreview = document.querySelector(".input-img-modal-page2");
 const titreFormulaire = document.getElementById("titre");
 const categorieFormulaire = document.getElementById("categorie");
 
+
 //vérification du formulaire
 function verifForm () {
     if (values.image == "") {
@@ -233,6 +235,7 @@ categorieFormulaire.addEventListener('change', (e) => {
     verifForm();
 })
 
+
 //affiche message d'erreur en rouge pour le formulaire d'ajout sur la modale
 formAjoutPhoto.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -258,24 +261,22 @@ formAjoutPhoto.addEventListener('submit', function (e) {
     e.preventDefault()
 
     const formData = new FormData(formAjoutPhoto);
-    formData.append('imageUrl', ImagePreview.value)
-    const objetFormData = Object.fromEntries(formData)
-    console.log(objetFormData)
+    
+    console.log(formData)
 
-    fetchPostImage('http://localhost:5678/api/works', objetFormData)
-})
-
-function fetchPostImage (url, objetFormData) {
-    fetch(url, {
-        method : "POST",
+    fetch('http://localhost:5678/api/works', {
+        method: 'POST',
         headers : {
-             "Content-Type": "multipart/form-data",
-             "accept": "application/json",
-             "Authorization": "bearer " + token,
-            },
-        body : JSON.stringify(objetFormData)
+            "Authorization": "bearer " + token,
+           },
+        body: formData
     })
-        .then(response => response.json())
-        .then(response => console.log(response))
-        console.log(JSON.stringify(objetFormData))
-}
+    .then(response => response.json())
+    .then(response => console.log(response))
+    console.log(formData)
+    });
+
+    formAjoutPhoto.addEventListener('submit', function (e) {
+        closeModal(e)
+        location.reload()
+    })
