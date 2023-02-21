@@ -2,7 +2,7 @@
 const photosPageEditeur = document.querySelector(".gallery")
 
 function createFigurePageEditeur (source, texte) {
-    // photosPageEditeur.innerHTML = '';
+    //photosPageEditeur.innerHTML = '';
     // tout effacer avant de créer
     let figure = document.createElement('figure');
     photosPageEditeur.appendChild(figure);
@@ -22,14 +22,16 @@ function displayPortfolioPageEditeur (data) {
     for (let i of data) {
         createFigurePageEditeur (i.imageUrl, i.title)
     }
+    console.log(data)
 }
 
 function fetchPortfolioPageEditeur () { 
     fetch('http://localhost:5678/api/works')
-        .then(response => (response.json()))
+        .then(response => response.json())
         .then(data => displayPortfolioPageEditeur(data))
 }
 
+console.log(fetchPortfolioPageEditeur)
 fetchPortfolioPageEditeur()
 
 
@@ -113,7 +115,10 @@ function createFigureModale (source, id) {
 
     trash.addEventListener("click", (event) => {
         event.preventDefault();
-        location.reload()
+        removeAllphotosPageEditeurChild()
+        removeAllphotosPageEditeurModaleChild()
+        fetchPortfolioPageEditeur();
+        fetchPortfolioModale();
         fetchDelete("http://localhost:5678/api/works/" + id)
     })
 } 
@@ -126,27 +131,28 @@ function fetchDelete (url) {
             "Content-Type": "application/json",
             "Authorization": "bearer " + token,
     }})
-    .then(response => {
-        if(response.ok) {
-            fetchPortfolioPageEditeur();
-            fetchPortfolioModale();
-        }
-    })
 }
 
 function displayPortfolioModale (data) {
     for (let i of data) {
         createFigureModale (i.imageUrl, i.id)
     }
+    console.log(data)
 }
 
 function fetchPortfolioModale () { 
     fetch('http://localhost:5678/api/works')
         .then(response => response.json())
         .then(data => displayPortfolioModale(data))
+        console.log(data)
 }
 
+console.log(fetchPortfolioModale)
 fetchPortfolioModale()
+
+function removeAllphotosPageEditeurModaleChild () {
+    photosEditer.innerHTML = '';
+}
 
 //changer entre la page 1 et 2 de la modale 
 const boutonAJouterPhotoModale = document.querySelector(".button-ajouter-photo")
@@ -252,31 +258,29 @@ formAjoutPhoto.addEventListener('submit', function (e) {
         const errorCategorie = document.querySelector(".error-categorie");
         errorCategorie.innerHTML = "Choisir une catégorie"
         errorCategorie.style.color = "red"
-    } 
+    } else {
+        //envoyer les nouvelles images à l'API
+        const formData = new FormData(formAjoutPhoto);
+    
+        fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            headers : {
+                "Authorization": "bearer " + token,
+               },
+            body: formData
+        })
+        .then(response => response.json());
+
+        removeAllphotosPageEditeurChild();
+        removeAllphotosPageEditeurModaleChild();
+        fetchPortfolioPageEditeur();
+        fetchPortfolioModale();
+        closeModal(e);
+    }
+
 })
 
+function removeAllphotosPageEditeurChild () {
+    photosPageEditeur.innerHTML = '';
+}
 
-//envoyer les nouvelles images à l'API
-formAjoutPhoto.addEventListener('submit', function (e) {
-    e.preventDefault()
-
-    const formData = new FormData(formAjoutPhoto);
-    
-    console.log(formData)
-
-    fetch('http://localhost:5678/api/works', {
-        method: 'POST',
-        headers : {
-            "Authorization": "bearer " + token,
-           },
-        body: formData
-    })
-    .then(response => response.json())
-    .then(response => console.log(response))
-    console.log(formData)
-    });
-
-    formAjoutPhoto.addEventListener('submit', function (e) {
-        closeModal(e)
-        location.reload()
-    })
