@@ -22,6 +22,7 @@ function displayPortfolioPageEditeur (data) {
     for (let i of data) {
         createFigurePageEditeur (i.imageUrl, i.title)
     }
+
 }
 
 function fetchPortfolioPageEditeur () { 
@@ -113,10 +114,6 @@ function createFigureModale (source, id) {
 
     trash.addEventListener("click", (event) => {
         event.preventDefault();
-        removeAllphotosPageEditeurChild()
-        removeAllphotosPageEditeurModaleChild()
-        fetchPortfolioPageEditeur();
-        fetchPortfolioModale();
         fetchDelete("http://localhost:5678/api/works/" + id)
     })
 } 
@@ -129,6 +126,12 @@ function fetchDelete (url) {
             "Content-Type": "application/json",
             "Authorization": "bearer " + token,
     }})
+    .then(() => {
+        removeAllphotosPageEditeurChild()
+        removeAllphotosPageEditeurModaleChild()
+        fetchPortfolioPageEditeur();
+        fetchPortfolioModale();
+    })
 }
 
 function displayPortfolioModale (data) {
@@ -265,18 +268,16 @@ formAjoutPhoto.addEventListener('submit', function (e) {
                },
             body: formData
         })
-        .then(response => response.json());
-
-        removeAllphotosPageEditeurChild();
-        removeAllphotosPageEditeurModaleChild();
-        fetchPortfolioPageEditeur();
-        fetchPortfolioModale();
-        closeModal(e);
+        .then(() => {
+            removeAllphotosPageEditeurChild();
+            removeAllphotosPageEditeurModaleChild();
+            fetchPortfolioPageEditeur();
+            fetchPortfolioModale();
+            closeModal(e);
+        })
     }
-
 })
 
 function removeAllphotosPageEditeurChild () {
     photosPageEditeur.innerHTML = '';
 }
-
