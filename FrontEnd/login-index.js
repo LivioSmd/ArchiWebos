@@ -22,7 +22,6 @@ function displayPortfolioPageEditeur (data) {
     for (let i of data) {
         createFigurePageEditeur (i.imageUrl, i.title)
     }
-    console.log(data)
 }
 
 function fetchPortfolioPageEditeur () { 
@@ -31,7 +30,6 @@ function fetchPortfolioPageEditeur () {
         .then(data => displayPortfolioPageEditeur(data))
 }
 
-console.log(fetchPortfolioPageEditeur)
 fetchPortfolioPageEditeur()
 
 
@@ -137,17 +135,15 @@ function displayPortfolioModale (data) {
     for (let i of data) {
         createFigureModale (i.imageUrl, i.id)
     }
-    console.log(data)
 }
 
 function fetchPortfolioModale () { 
     fetch('http://localhost:5678/api/works')
         .then(response => response.json())
         .then(data => displayPortfolioModale(data))
-        console.log(data)
+
 }
 
-console.log(fetchPortfolioModale)
 fetchPortfolioModale()
 
 function removeAllphotosPageEditeurModaleChild () {
